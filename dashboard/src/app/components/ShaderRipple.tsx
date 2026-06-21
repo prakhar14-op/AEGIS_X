@@ -151,7 +151,7 @@ export function ShaderRipple({
     onResize();
     window.addEventListener("resize", onResize);
 
-    let animationId: number;
+    let animationId: number = 0;
     const animate = () => {
       animationId = requestAnimationFrame(animate);
       uniforms.time.value += speed * animationSpeed;
