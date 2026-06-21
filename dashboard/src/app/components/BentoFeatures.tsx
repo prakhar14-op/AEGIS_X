@@ -153,12 +153,18 @@ export default function BentoFeatures() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            style={{ padding: 28, gridColumn: f.className.includes('col-span-4') ? 'span 4' : f.className.includes('col-span-3') ? 'span 3' : 'span 2', borderBottom: f.className.includes('border-b') ? '1px solid rgba(255,255,255,0.07)' : 'none', borderRight: f.className.includes('border-r') ? '1px solid rgba(255,255,255,0.07)' : 'none' }}
+            whileHover={{ scale: 1.02, borderColor: `${f.badgeColor}40` }}
+            style={{ padding: 28, gridColumn: f.className.includes('col-span-4') ? 'span 4' : f.className.includes('col-span-3') ? 'span 3' : 'span 2', borderBottom: f.className.includes('border-b') ? '1px solid rgba(255,255,255,0.07)' : 'none', borderRight: f.className.includes('border-r') ? '1px solid rgba(255,255,255,0.07)' : 'none', cursor: 'default', transition: 'all 0.3s', position: 'relative', overflow: 'hidden' }}
           >
-            <span style={{ fontSize: 9, letterSpacing: '0.12em', color: f.badgeColor, fontFamily: 'JetBrains Mono', fontWeight: 600, textTransform: 'uppercase' }}>{f.badge}</span>
-            <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-main)', fontFamily: 'Space Grotesk', margin: '8px 0 6px', lineHeight: 1.2 }}>{f.title}</h3>
-            <p style={{ fontSize: 13, color: 'var(--text-sub)', lineHeight: 1.6, maxWidth: 400 }}>{f.desc}</p>
-            {f.skeleton}
+            <motion.div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 30% 30%, ${f.badgeColor}06, transparent 70%)`, opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 + 0.1 }} style={{ fontSize: 9, letterSpacing: '0.12em', color: f.badgeColor, fontFamily: 'JetBrains Mono', fontWeight: 600, textTransform: 'uppercase', display: 'inline-block' }}>{f.badge}</motion.span>
+              <motion.h3 initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }} style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-main)', fontFamily: 'Space Grotesk', margin: '8px 0 6px', lineHeight: 1.2 }}>{f.title}</motion.h3>
+              <motion.p initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 + 0.3, duration: 0.5 }} style={{ fontSize: 13, color: 'var(--text-sub)', lineHeight: 1.6, maxWidth: 400 }}>{f.desc}</motion.p>
+              <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 + 0.4, duration: 0.5 }}>
+                {f.skeleton}
+              </motion.div>
+            </div>
           </motion.div>
         ))}
       </div>

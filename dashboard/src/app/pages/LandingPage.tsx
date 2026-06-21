@@ -12,6 +12,7 @@ import HowItWorks from '../components/HowItWorks'
 import GradientText from '../components/GradientText'
 import FlipWords from '../components/FlipWords'
 import RippleGrid from '../components/RippleGrid'
+import TrustDonut from '../components/TrustDonut'
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
@@ -152,9 +153,20 @@ const LandingPage: React.FC = () => {
         <BentoFeatures />
       </section>
 
-      {/* ── HOW IT WORKS — Stepper ── */}
+      {/* ── HOW IT WORKS — Stepper + Donut Chart ── */}
       <section id="pipeline" style={{ padding: '80px 40px', background: 'var(--bg-page)' }}>
-        <HowItWorks />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 440px', gap: 0, maxWidth: 1360, margin: '0 auto', alignItems: 'start' }}>
+          <HowItWorks />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{ position: 'sticky', top: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 60 }}
+          >
+            <TrustDonut />
+          </motion.div>
+        </div>
       </section>
 
       {/* ── INTERACTIVE DEMO — NxtDevs ChallengeTeaser style ── */}
