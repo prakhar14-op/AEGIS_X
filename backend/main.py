@@ -94,21 +94,29 @@ async def websocket_sdk(websocket: WebSocket, user_id: str, session_id: Optional
                 tx_amount = message.get("transaction_amount", 0.0)
                 is_new_ben = message.get("is_new_beneficiary", False)
 
-                result = processor.process_behavioral_event(
-                    user_id=user_id,
-                    raw_event=raw_event,
-                    transaction_amount=tx_amount,
-                    is_new_beneficiary=is_new_ben,
-                )
-                await websocket.send_json(result)
-                await connection_manager.broadcast_to_dashboards({"user_id": user_id, **result})
+                try:
+                    result = processor.process_behavioral_event(
+                        user_id=user_id,
+                        raw_event=raw_event,
+                        transaction_amount=tx_amount,
+                        is_new_beneficiary=is_new_ben,
+                    )
+                    await websocket.send_json(result)
+                    await connection_manager.broadcast_to_dashboards({"user_id": user_id, **result})
 
-                if result.get("decision") == "BLOCK":
-                    await connection_manager.broadcast_alert({
-                        "alert_type": "session_blocked",
+                    if result.get("decision") == "BLOCK":
+                        await connection_manager.broadcast_alert({
+                            "alert_type": "session_blocked",
+                            "user_id": user_id,
+                            "trust_score": result.get("trust_score"),
+                            "cognitive_state": result.get("cognitive_state"),
+                        })
+                except Exception as proc_err:
+                    print(f"[AEGIS-X] Processing error for {user_id}: {proc_err}")
+                    await websocket.send_json({
+                        "type": "error",
+                        "message": str(proc_err),
                         "user_id": user_id,
-                        "trust_score": result.get("trust_score"),
-                        "cognitive_state": result.get("cognitive_state"),
                     })
 
             elif msg_type == "ping":

@@ -367,12 +367,12 @@ class EventProcessor:
             "cognitive_state": result.cognitive_state,
             "cognitive_stability": result.cognitive_stability,
 
-            "drift_detected": result.drift_detected,
+            "drift_detected": bool(result.drift_detected),
             "drift_severity": result.drift_severity,
 
             "anomaly": {
                 "score": round(result.anomaly_score, 4),
-                "is_anomaly": result.is_anomaly,
+                "is_anomaly": bool(result.is_anomaly),
             },
 
             "fraud": {

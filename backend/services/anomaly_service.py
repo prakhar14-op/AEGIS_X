@@ -36,7 +36,7 @@ class AnomalyService:
         prediction = self._model.predict(sample)[0]
 
         anomaly_score = max(0.0, min(1.0, -raw_score / 0.5))
-        is_anomaly = prediction == -1
+        is_anomaly = bool(prediction == -1)
 
         return {
             "anomaly_score": round(float(anomaly_score), 4),
