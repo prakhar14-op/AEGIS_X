@@ -10,7 +10,6 @@ Similarity interpretation (from proposal thresholds):
     > 0.75  → NORMAL     (acceptable variance, natural day-to-day drift)
     > 0.60  → SUSPICIOUS (significant deviation, step-up auth recommended)
     ≤ 0.60  → HIGH_RISK  (behavioral identity mismatch, likely different actor)
-    
 """
 
 import numpy as np

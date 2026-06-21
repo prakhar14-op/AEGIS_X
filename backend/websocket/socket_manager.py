@@ -1,37 +1,3 @@
-"""
-AEGIS-X Phase 6C.1: WebSocket Connection Manager
-==================================================
-Manages real-time bidirectional connections between the React Native SDK
-and the AEGIS-X backend for continuous behavioral trust streaming.
-
-Architecture:
-    React Native SDK (client)
-         ↕ WebSocket (persistent connection)
-    Socket Manager (this file)
-         ↓
-    Session Manager → Trust Pipeline → Trust Update
-         ↓
-    Push trust_update back to client + broadcast to dashboard
-
-Why WebSocket over HTTP polling?
-    HTTP: Open → Send → Receive → Close (every request = new connection)
-    WebSocket: Open ONCE → stream forever in both directions
-
-    At 2-second heartbeat intervals with 100 concurrent users:
-    - HTTP: 50 new TCP connections/second (wasteful)
-    - WebSocket: 100 persistent connections (efficient)
-
-    WebSocket also enables SERVER-INITIATED pushes:
-    - Real-time alerts ("BLOCK" pushed to SDK instantly)
-    - Dashboard live updates (no polling required)
-
-Connection Registry:
-    Maps user_id → active WebSocket connection
-    Enables targeted pushes (alert specific user) and broadcasts (dashboard)
-
-Reference: Section 5 - "streams behavioral signals to the backend via WebSocket every 2 seconds"
-"""
-
 from fastapi import WebSocket, WebSocketDisconnect
 from typing import Dict, Optional, Set, List
 from datetime import datetime, timezone

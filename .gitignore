@@ -1,9 +1,37 @@
+# Python
 venv/
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Environment
 .env
+
+# Data (raw only — synthetic is committed)
 data/raw/
-models/*.pkl
-embeddings/
+
+# ML model artifacts (too large for git)
+models/cognitive/cognitive_rf.pkl
+models/**/*.pkl
+models/**/*.pt
+models/**/*.onnx
+
+# Embeddings (generated at runtime)
+embeddings/baselines/
+
+# IDE
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (aegis-dashboard)
+aegis-dashboard/node_modules/
+aegis-dashboard/.next/
