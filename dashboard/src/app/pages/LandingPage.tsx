@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { motion } from 'motion/react'
 import {
-  ArrowRight, Shield, Brain, Activity, Fingerprint, Zap, Lock,
-  ChevronRight, Sparkles, Layers, Radio, TrendingDown, AlertTriangle,
-  CheckCircle, Eye,
+  ArrowRight, Shield, Zap, Radio,
+  ChevronRight, Sparkles, CheckCircle,
 } from 'lucide-react'
 import CardSwap, { Card } from '../components/CardSwap'
 import { Card1, Card2, Card3, Card4, Card5 } from '../components/LandingCards'
@@ -13,7 +12,6 @@ import HowItWorks from '../components/HowItWorks'
 import GradientText from '../components/GradientText'
 import FlipWords from '../components/FlipWords'
 import RippleGrid from '../components/RippleGrid'
-import FinalCard from '../components/FinalCard'
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
@@ -159,64 +157,64 @@ const LandingPage: React.FC = () => {
         <HowItWorks />
       </section>
 
-      {/* ── CTA SECTION — MediaGuard light-card style ── */}
-      <section id="architecture" style={{ padding: '80px 40px', position: 'relative' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            maxWidth: 800, margin: '0 auto', borderRadius: 28, overflow: 'hidden',
-            background: 'linear-gradient(180deg, #f0fdf9 0%, #ecfdf5 40%, #f8fafc 100%)',
-            padding: '64px 48px', textAlign: 'center', position: 'relative',
-            boxShadow: '0 20px 80px rgba(0,0,0,0.15)',
-          }}
-        >
-          {/* Grid pattern background */}
-          <div style={{ position: 'absolute', inset: 0, opacity: 0.4, backgroundImage: 'linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
-          {/* Large watermark */}
-          <div style={{ position: 'absolute', bottom: -20, right: -10, fontSize: 180, fontWeight: 900, color: 'rgba(16,185,129,0.04)', fontFamily: 'Space Grotesk', lineHeight: 1, pointerEvents: 'none' }}>AI</div>
-
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 999, padding: '6px 16px', marginBottom: 24 }}>
-              <Zap size={12} color="#059669" />
-              <span style={{ fontSize: 10, fontWeight: 700, color: '#059669', letterSpacing: '0.15em', fontFamily: 'JetBrains Mono' }}>READY TO DEPLOY</span>
+      {/* ── INTERACTIVE DEMO — NxtDevs ChallengeTeaser style ── */}
+      <section id="architecture" style={{ padding: '96px 24px', position: 'relative', overflow: 'hidden', background: 'rgba(0,0,0,0.3)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 500, height: 500, background: 'rgba(16,185,129,0.06)', borderRadius: '50%', filter: 'blur(120px)', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+          <div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 999, background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', marginBottom: 24 }}>
+              <Radio size={14} color="#10B981" />
+              <span style={{ fontSize: 12, fontWeight: 700, color: '#10B981', fontFamily: 'JetBrains Mono' }}>Live Pipeline</span>
             </div>
-
-            <h2 style={{ fontSize: 48, fontWeight: 800, color: '#0F172A', fontFamily: 'Space Grotesk', letterSpacing: '-0.03em', margin: '0 0 4px', lineHeight: 1.1 }}>
-              Deploy the Engine.
+            <h2 style={{ fontSize: 44, fontWeight: 700, color: 'var(--text-main)', fontFamily: 'Space Grotesk', letterSpacing: '-0.03em', lineHeight: 1.1, margin: '0 0 20px' }}>
+              Don't just block.<br />
+              <GradientText colors={['#10B981','#06B6D4','#3B82F6','#10B981']} animationSpeed={6}>Understand why.</GradientText>
             </h2>
-            <h2 style={{ fontSize: 48, fontWeight: 800, color: '#059669', fontFamily: 'Space Grotesk', letterSpacing: '-0.03em', margin: '0 0 20px', lineHeight: 1.1 }}>
-              Protect Your Users.
-            </h2>
-
-            <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 36px' }}>
-              One WebSocket connection. Full trust pipeline every 2 seconds — detect, classify, decide, and explain — while you watch the results stream live on the command center dashboard.
+            <p style={{ fontSize: 16, color: 'var(--text-sub)', lineHeight: 1.7, maxWidth: 440, margin: '0 0 24px' }}>
+              Most fraud systems say "blocked." AEGIS-X explains <em style={{ color: 'var(--text-main)' }}>why</em> — cognitive state, drift trajectory, root causes — so compliance teams trust the decision.
             </p>
-
-            <motion.button
-              onClick={() => navigate('/app/monitor')}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '16px 32px', borderRadius: 999,
-                background: '#0F172A', color: 'white',
-                fontSize: 14, fontWeight: 700, fontFamily: 'Space Grotesk',
-                border: 'none', cursor: 'pointer',
-                boxShadow: '0 8px 30px rgba(15,23,42,0.25)',
-                transition: 'all 0.2s',
-              }}
-            >
-              <Shield size={15} /> Initialize Command Center <ArrowRight size={15} />
-            </motion.button>
-
-            <p style={{ fontSize: 9, color: '#94A3B8', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', marginTop: 28 }}>
-              CYBER SECURITY PSBs HACKATHON 2026 · DFS & IBA · CENTRAL BANK OF INDIA
-            </p>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>Try the scenario →</p>
           </div>
-        </motion.div>
+
+          {/* Interactive Card */}
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+            style={{ background: 'rgba(10,13,20,0.8)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: 28, position: 'relative', overflow: 'hidden', backdropFilter: 'blur(8px)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono', color: 'rgba(255,255,255,0.35)' }}>behavioral_event.json</span>
+              <div style={{ display: 'flex', gap: 5 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(239,68,68,0.4)' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(245,158,11,0.4)' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(16,185,129,0.4)' }} />
+              </div>
+            </div>
+            <pre style={{ fontFamily: 'JetBrains Mono', fontSize: 11, lineHeight: 1.8, color: '#C4B5FD', background: 'rgba(0,0,0,0.4)', padding: 16, borderRadius: 10, border: '1px solid rgba(255,255,255,0.05)', margin: '0 0 20px', whiteSpace: 'pre-wrap' }}>{`{
+  "typing_speed_cps": 1.2,
+  "hesitation_ratio": 0.72,
+  "correction_rate": 0.45,
+  "gyroscope_variance": 0.065,
+  "swipe_straightness": 0.42
+}`}</pre>
+            <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-main)', marginBottom: 14 }}>What should the system decide?</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ padding: '14px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.06)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}>
+                <span style={{ fontFamily: 'JetBrains Mono', fontSize: 13, color: 'var(--text-sub)' }}>ALLOW — User is fine</span>
+              </div>
+              <div style={{ padding: '14px 16px', borderRadius: 10, border: '1px solid rgba(16,185,129,0.3)', background: 'rgba(16,185,129,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontFamily: 'JetBrains Mono', fontSize: 13, color: '#10B981', fontWeight: 600 }}>BLOCK — Coercion detected</span>
+                <CheckCircle size={16} color="#10B981" />
+              </div>
+            </div>
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }}
+              style={{ marginTop: 14, padding: 14, borderRadius: 10, background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)' }}>
+              <p style={{ fontSize: 12, fontWeight: 600, color: '#10B981', margin: '0 0 4px' }}>Correct — BLOCK</p>
+              <p style={{ fontSize: 11, color: 'var(--text-sub)', margin: 0, lineHeight: 1.6 }}>
+                Hesitation ratio 0.72 + correction rate 0.45 + device shake 0.065 → Cognitive state: COERCED. Trust Score: 0.38. Decision Engine blocks transaction and alerts fraud team.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ── FOOTER ── */}
