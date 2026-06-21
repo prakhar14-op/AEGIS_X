@@ -8,15 +8,7 @@ import {
 } from 'lucide-react'
 import CardSwap, { Card } from '../components/CardSwap'
 import { Card1, Card2, Card3, Card4, Card5 } from '../components/LandingCards'
-
-const features = [
-  { icon: <Fingerprint size={20} />, title: '384-D Behavioral Embedding', desc: 'MiniLM-L6-v2 converts behavioral text into semantic fingerprints. Cosine similarity detects identity drift.', color: '#10B981' },
-  { icon: <TrendingDown size={20} />, title: 'CUSUM Drift Detection', desc: 'Cumulative sum catches gradual account takeover that single-threshold checks miss entirely.', color: '#F59E0B' },
-  { icon: <Brain size={20} />, title: 'Cognitive State Machine', desc: 'Random Forest (96.3%) classifies: calm, focused, distressed, panicked, coerced, robotic.', color: '#3B82F6' },
-  { icon: <Zap size={20} />, title: 'Trust Score T(t)', desc: '0.40×Similarity + 0.20×Device + 0.20×Transaction + 0.20×Cognitive with velocity tracking.', color: '#10B981' },
-  { icon: <AlertTriangle size={20} />, title: 'Decision Engine', desc: 'ALLOW (T>0.85) | STEP-UP (0.60-0.85) | BLOCK (T<0.60). Override rules for coercion.', color: '#EF4444' },
-  { icon: <Lock size={20} />, title: 'Explainability Layer', desc: 'Root cause analysis, incident classification, timeline narratives, executive summaries.', color: '#8B5CF6' },
-]
+import BentoFeatures from '../components/BentoFeatures'
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
@@ -147,45 +139,9 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Grid — exact FinSight structure */}
-      <section style={{ padding: '100px 40px', background: 'var(--bg-panel, #0c1222)', position: 'relative' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.18)', borderRadius: '20px', padding: '5px 14px', marginBottom: '20px' }}>
-              <Layers size={11} color="#10B981" />
-              <span style={{ fontSize: '11px', color: '#10B981', fontFamily: 'JetBrains Mono' }}>THE PLATFORM</span>
-            </div>
-            <h2 style={{ fontSize: '42px', fontWeight: 700, color: 'var(--text-main)', fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em', margin: '0 0 16px' }}>
-              4-Stage Trust Pipeline
-            </h2>
-            <p style={{ fontSize: '16px', color: 'var(--text-sub)', maxWidth: '560px', margin: '0 auto', lineHeight: '1.7' }}>
-              Every 2 seconds, behavioral telemetry flows through four AI stages to produce a continuous trust verdict.
-            </p>
-          </motion.div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            {features.map((feat, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.5 }}
-                whileHover={{ y: -4, boxShadow: `0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px ${feat.color}25` }}
-                style={{ background: 'var(--bg-page, #060b18)', border: '1px solid var(--border-light)', borderRadius: '14px', padding: '28px', cursor: 'default', transition: 'all 0.3s', boxShadow: '0 2px 12px rgba(0,0,0,0.2)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: `${feat.color}12`, border: `1px solid ${feat.color}28`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', color: feat.color }}>
-                  {feat.icon}
-                </div>
-                <h4 style={{ margin: '0 0 10px', fontSize: '15px', fontWeight: 600, color: 'var(--text-main)', fontFamily: 'Space Grotesk, sans-serif' }}>{feat.title}</h4>
-                <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-sub)', lineHeight: '1.65' }}>{feat.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '48px' }}>
-            <motion.button onClick={() => navigate('/app/monitor')} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}
-              style={{ background: 'transparent', border: '1px solid rgba(16,185,129,0.3)', color: '#10B981', padding: '12px 28px', borderRadius: '10px', cursor: 'pointer', fontFamily: 'Space Grotesk, sans-serif', fontWeight: 500, fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(16,185,129,0.06)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}>
-              View Full Architecture <ArrowRight size={15} />
-            </motion.button>
-          </div>
-        </div>
+      {/* Features — Bento Grid (NxtDevs-inspired) */}
+      <section style={{ padding: '40px 0', background: 'var(--bg-panel, #12151E)', position: 'relative' }}>
+        <BentoFeatures />
       </section>
 
       {/* Architecture Strip — exact FinSight 5-col pattern */}
