@@ -53,4 +53,10 @@ button:focus { outline: none; }
   50% { opacity: 0.5; box-shadow: 0 0 10px currentColor; }
 }
 
+@keyframes aurora {
+  0% { background-position: 0% 50%; transform: scale(1) rotate(0deg); }
+  50% { background-position: 100% 50%; transform: scale(1.1) rotate(3deg); }
+  100% { background-position: 0% 50%; transform: scale(1) rotate(0deg); }
+}
+
 .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { motion } from 'motion/react'
 import {
-  ArrowRight, Shield, Zap, Radio,
+  ArrowRight, Shield, Radio,
   ChevronRight, Sparkles, CheckCircle,
 } from 'lucide-react'
 import CardSwap, { Card } from '../components/CardSwap'
@@ -14,6 +14,7 @@ import FlipWords from '../components/FlipWords'
 import RippleGrid from '../components/RippleGrid'
 import TrustDonut from '../components/TrustDonut'
 import MagicRings from '../components/MagicRings'
+import { isAuthenticated, getUsername } from '../../services/auth'
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
@@ -85,10 +86,26 @@ const LandingPage: React.FC = () => {
               {label}
             </button>
           ))}
-          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={() => navigate('/app/monitor')}
-            style={{ marginLeft: 8, padding: '8px 20px', background: '#10B981', color: '#0A0D14', fontSize: 11, fontWeight: 800, borderRadius: 999, border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(16,185,129,0.35)', transition: 'all 0.2s' }}>
-            Launch →
-          </motion.button>
+          <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 4px' }} />
+          {isAuthenticated() ? (
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={() => navigate('/app/monitor')}
+              style={{ marginLeft: 4, padding: '8px 20px', background: '#10B981', color: '#0A0D14', fontSize: 11, fontWeight: 800, borderRadius: 999, border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(16,185,129,0.35)', transition: 'all 0.2s' }}>
+              Dashboard →
+            </motion.button>
+          ) : (
+            <>
+              <button onClick={() => navigate('/login')}
+                style={{ padding: '6px 14px', fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.7)', borderRadius: 999, background: 'transparent', border: 'none', cursor: 'pointer', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'white')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}>
+                Login
+              </button>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={() => navigate('/register')}
+                style={{ padding: '8px 18px', background: '#10B981', color: '#0A0D14', fontSize: 11, fontWeight: 800, borderRadius: 999, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, boxShadow: '0 0 20px rgba(16,185,129,0.35)', transition: 'all 0.2s' }}>
+                Create Account <ArrowRight size={12} />
+              </motion.button>
+            </>
+          )}
         </div>
       </motion.nav>
 
@@ -131,15 +148,15 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-              <motion.button onClick={() => navigate('/app/monitor')} whileHover={{ scale: 1.03, boxShadow: '0 8px 40px rgba(16,185,129,0.4)' }} whileTap={{ scale: 0.98 }}
+              <motion.button onClick={() => navigate(isAuthenticated() ? '/app/monitor' : '/register')} whileHover={{ scale: 1.03, boxShadow: '0 8px 40px rgba(16,185,129,0.4)' }} whileTap={{ scale: 0.98 }}
                 style={{ background: 'linear-gradient(135deg, #10B981, #059669)', border: 'none', color: 'white', padding: '14px 28px', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Space Grotesk', fontWeight: 600, boxShadow: '0 0 30px rgba(16,185,129,0.3)', fontSize: 15 }}>
-                Open Dashboard <ArrowRight size={16} />
+                {isAuthenticated() ? 'Open Dashboard' : 'Get Started'} <ArrowRight size={16} />
               </motion.button>
-              <motion.button onClick={() => navigate('/app/incident')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.button onClick={() => navigate(isAuthenticated() ? '/app/incident' : '/login')} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-sub)', padding: '14px 28px', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Space Grotesk', fontWeight: 500, fontSize: 15, transition: 'all 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(16,185,129,0.4)'; e.currentTarget.style.color = '#10B981' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'var(--text-sub)' }}>
-                Explore Features <ChevronRight size={16} />
+                {isAuthenticated() ? 'Explore Features' : 'Sign In'} <ChevronRight size={16} />
               </motion.button>
             </div>
 

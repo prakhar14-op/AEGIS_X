@@ -1,10 +1,11 @@
 import React from 'react'
-import { NavLink, useLocation } from 'react-router'
+import { NavLink, useLocation, useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'motion/react'
 import {
   Activity, Radio, TrendingDown, Brain, FileWarning, RotateCcw,
-  PanelLeftClose, PanelLeftOpen, Shield, ChevronLeft,
+  PanelLeftClose, PanelLeftOpen, Shield, ChevronLeft, LogOut,
 } from 'lucide-react'
+import { logout, getUsername } from '../../services/auth'
 
 const navItems = [
   { icon: <Radio size={17} />, label: 'Live Monitor', path: '/app/monitor', desc: 'Real-time trust' },
@@ -139,15 +140,28 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             <div className="mono" style={{ fontSize: 9, color: 'var(--text-muted)', marginTop: 3 }}>Latency: ~65ms • Uptime: 100%</div>
           </div>
         )}
-        <NavLink to="/" style={{ textDecoration: 'none' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: collapsed ? '9px 0' : '8px 10px', borderRadius: 6, cursor: 'pointer', justifyContent: collapsed ? 'center' : 'flex-start', marginTop: 8, transition: 'background var(--transition-fast)' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(148,163,184,0.05)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-          >
-            <ChevronLeft size={13} color="var(--text-muted)" />
-            {!collapsed && <span className="mono" style={{ fontSize: 11, color: 'var(--text-muted)' }}>Back to landing</span>}
+        {!collapsed && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 10px 4px', marginTop: 8 }}>
+            <div>
+              <div className="heading" style={{ fontSize: 12, color: 'var(--text-sub)', fontWeight: 600 }}>{getUsername() || 'User'}</div>
+              <div className="mono" style={{ fontSize: 9, color: 'var(--text-muted)' }}>Analyst</div>
+            </div>
+            <button onClick={() => logout()} title="Sign out"
+              style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)', borderRadius: 6, padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EF4444', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.15)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.08)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.15)' }}>
+              <LogOut size={13} />
+            </button>
           </div>
-        </NavLink>
+        )}
+        {collapsed && (
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
+            <button onClick={() => logout()} title="Sign out"
+              style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)', borderRadius: 6, padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EF4444' }}>
+              <LogOut size={13} />
+            </button>
+          </div>
+        )}
       </div>
     </motion.aside>
   )
