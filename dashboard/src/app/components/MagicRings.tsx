@@ -134,15 +134,12 @@ export default function MagicRings({
       const rect = mount.getBoundingClientRect()
       mouseRef.current[0] = (e.clientX - rect.left) / rect.width - 0.5
       mouseRef.current[1] = -((e.clientY - rect.top) / rect.height - 0.5)
+      isHoveredRef.current = true
     }
-    const onEnter = () => { isHoveredRef.current = true }
-    const onLeave = () => { isHoveredRef.current = false; mouseRef.current = [0, 0] }
     const onClick = () => { burstRef.current = 1 }
 
-    mount.addEventListener('mousemove', onMove)
-    mount.addEventListener('mouseenter', onEnter)
-    mount.addEventListener('mouseleave', onLeave)
-    mount.addEventListener('click', onClick)
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('click', onClick)
 
     let frameId: number
     const animate = (t: number) => {
@@ -183,10 +180,8 @@ export default function MagicRings({
       cancelAnimationFrame(frameId)
       window.removeEventListener('resize', resize)
       ro.disconnect()
-      mount.removeEventListener('mousemove', onMove)
-      mount.removeEventListener('mouseenter', onEnter)
-      mount.removeEventListener('mouseleave', onLeave)
-      mount.removeEventListener('click', onClick)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('click', onClick)
       mount.removeChild(renderer.domElement)
       renderer.dispose()
       material.dispose()

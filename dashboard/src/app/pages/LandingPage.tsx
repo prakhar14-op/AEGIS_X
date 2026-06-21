@@ -28,7 +28,7 @@ const LandingPage: React.FC = () => {
   return (
     <div style={{ background: 'var(--bg-page)', minHeight: '100vh', color: 'var(--text-main)', fontFamily: 'Inter, sans-serif', overflowX: 'hidden', position: 'relative' }}>
       {/* MagicRings — WebGL shader rings follow cursor on landing page */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'auto' }}>
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <MagicRings
           color="#10B981"
           colorTwo="#06B6D4"
